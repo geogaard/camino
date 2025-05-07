@@ -1,0 +1,101 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "Rentxacobeo",
+        "adresse": "Rua Calvo Sotelo, 20, 27600 Sarria, Lugo, Spain",
+        "kontakt": "+34 676 451 970, info@rentxacobeo.com",
+        "bilde": "rentxacobeo.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.4145,
+          42.781
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "PortoHome \u00c1tico",
+        "adresse": "R\u00faa Albariza, 5-7, 27170 Portomar\u00edn, Lugo, Spain",
+        "kontakt": "663 601 626, infoportohome@gmail.com",
+        "bilde": "portohome_atico.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.6156,
+          42.8076
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "Apartamentos Carballal",
+        "adresse": "Avenida de Ourense 9, 27200 Palas de Rei, Lugo, Spain",
+        "kontakt": "nuelvg@gmail.com",
+        "bilde": "apartamentos_carballal.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -7.8678,
+          42.8735
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "Apartamento da Fraga",
+        "adresse": "87 R\u00faa Fraga do Rei, 15810 Arz\u00faa, Spain",
+        "kontakt": "Info ved reservasjon",
+        "bilde": "apartamento_da_fraga.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.1501,
+          42.9329
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "Casa JyM Fontela 24",
+        "adresse": "24 R\u00faa Fontela, 15821 O Pedrouzo, Lugo, Spain",
+        "kontakt": "Info ved reservasjon",
+        "bilde": "casa_jym_fontela_24.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.292,
+          42.9086
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "navn": "Pensi\u00f3n Residencia Fornos",
+        "adresse": "C/ H\u00f3rreo, 7 - 2\u00ba y 3\u00ba, 15702 Santiago de Compostela, Galicia, Spain",
+        "kontakt": "+34 981 585 130, prfornos@hotmail.com",
+        "bilde": "pensi\u00f3n_residencia_fornos.jpg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -8.5448,
+          42.8805
+        ]
+      }
+    }
+  ]
+}
