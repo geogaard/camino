@@ -1,0 +1,24 @@
+---
+import Header from '../components/Header.astro';
+const { title, lang = 'en' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+      body, html { margin: 0; padding: 0; height: 100%; }
+      main { padding-top: 3rem; height: calc(100% - 3rem); }
+    </style>
+  </head>
+  <body>
+    <Header currentLang={lang} />
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+---
+export async function getStaticPaths() {
+  return [
+    { params: { lang: 'no' } },
+    { params: { lang: 'en' } },
+    { params: { lang: 'zh' } },
+  ];
+}
+import DefaultLayout from '../../layouts/DefaultLayout.astro';
+import Map from '../../components/Map.astro';
+import i18next from 'i18next';
+const { lang } = Astro.params;
+const messages = await import(`../../locales/${lang}.json`);
+await i18next.init({ lng: lang, resources: { [lang]: { translation: messages } } });
+const pageTitle    = i18next.t('title');
+const addrLabel    = i18next.t('popup.adresse');
+const contactLabel = i18next.t('popup.kontakt');
+---
+<DefaultLayout title={pageTitle} lang={lang}>
+  <Map addrLabel={addrLabel} contactLabel={contactLabel} />
+</DefaultLayout>

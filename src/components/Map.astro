@@ -1,0 +1,80 @@
+---
+const { addrLabel, contactLabel } = Astro.props;
+const { lng } = Astro.props;
+---
+
+<div
+  id="map"
+  data-lng={lng}
+  data-addr-label={addrLabel}
+  data-contact-label={contactLabel}
+  style="height:100vh;"
+></div>
+
+<script type="module">
+  // 1) Grab the map container and its data-attributes
+  const mapEl = document.getElementById('map');
+  const lngCode      = mapEl.dataset.lng;
+  const addrLabel    = mapEl.dataset.addrLabel;
+  const contactLabel = mapEl.dataset.contactLabel;
+
+  // 2) Parse any ?lat, ?lng, ?zoom
+  const params = new URLSearchParams(window.location.search);
+  const lat0  = parseFloat(params.get('lat'));
+  const lng0  = parseFloat(params.get('lng'));
+  const zoom0 = parseInt(params.get('zoom'));
+  const hasView = !isNaN(lat0) && !isNaN(lng0) && !isNaN(zoom0);
+
+  // 3) Init Leaflet with preserved or default view
+  const map = L.map('map').setView(
+    hasView ? [lat0, lng0] : [42.88, -8.4],
+    hasView ? zoom0 : 9
+  );
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // 4) Draw route
+  fetch('/data/rute.geojson')
+    .then(r => r.json())
+    .then(route => {
+      const layer = L.geoJSON(route, {
+        style: { color: 'blue', weight: 3, opacity: 0.7 }
+      }).addTo(map);
+      if (!hasView) map.fitBounds(layer.getBounds());
+    });
+
+  // 5) Draw accommodations + popups
+  fetch('/data/overnattinger.geojson')
+    .then(r => r.json())
+    .then(accs => {
+      L.geoJSON(accs, {
+        onEachFeature: (feature, layer) => {
+          const p = feature.properties;
+          const html = `
+            <strong>${p.navn}</strong><br>
+            <img src="/bilder/${p.bilde}" width="200"/><br>
+            <b>${addrLabel}:</b> ${p.adresse}<br>
+            <b>${contactLabel}:</b> ${p.kontakt}
+          `;
+          layer.bindPopup(html);
+        }
+      }).addTo(map);
+    });
+
+  // 6) Update language‐switch links to carry view params
+  function updateLangLinks() {
+    const center = map.getCenter();
+    const zoom   = map.getZoom();
+    document.querySelectorAll('.topbar a').forEach(a => {
+      const url = new URL(a.href, window.location.origin);
+      url.searchParams.set('lat', center.lat.toFixed(6));
+      url.searchParams.set('lng', center.lng.toFixed(6));
+      url.searchParams.set('zoom', zoom);
+      a.href = url.pathname + url.search;
+    });
+  }
+
+  map.on('moveend', updateLangLinks);
+  updateLangLinks();
+</script>
