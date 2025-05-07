@@ -1,5 +1,11 @@
 name: Deploy Astro to GitHub Pages
 
+# Allow the built‐in GITHUB_TOKEN to write your pages branch
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 on:
   push:
     branches: [ main ]
@@ -19,11 +25,10 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npm run build   # generates ./dist
+        run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          # CNAME in repo root will be honored automatically
